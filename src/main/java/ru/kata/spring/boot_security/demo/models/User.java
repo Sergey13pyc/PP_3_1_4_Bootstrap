@@ -1,7 +1,5 @@
 package ru.kata.spring.boot_security.demo.models;
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +11,8 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
-    @Column(name = "year_of_birth")
-    private Integer year_of_birth;
+    @Column(name = "yearOfBirth")
+    private Integer yearOfBirth;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -22,10 +20,10 @@ public class User {
 
     public User() {}
 
-    public User(Long id, String username, Integer year_of_birth, String email, String password) {
+    public User(Long id, String username, Integer yearOfBirth, String email, String password) {
         this.id = id;
         this.username = username;
-        this.year_of_birth = year_of_birth;
+        this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.password = password;
     }
@@ -46,12 +44,12 @@ public class User {
         this.username = username;
     }
 
-    public Integer getYear_of_birth() {
-        return year_of_birth;
+    public Integer getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setYear_of_birth(Integer year_of_birth) {
-        this.year_of_birth = year_of_birth;
+    public void setYearOfBirth(Integer year_of_birth) {
+        this.yearOfBirth = year_of_birth;
     }
 
     public String getEmail() {
@@ -75,7 +73,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", year_of_birth=" + year_of_birth +
+                ", year_of_birth=" + yearOfBirth +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
