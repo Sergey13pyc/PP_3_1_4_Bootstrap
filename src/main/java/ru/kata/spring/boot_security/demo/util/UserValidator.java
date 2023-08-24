@@ -7,14 +7,18 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.MyUserDetailsService;
+import ru.kata.spring.boot_security.demo.services.UserService;
+
+import java.util.Optional;
+
 @Component
 public class UserValidator implements Validator {
 
-    private final MyUserDetailsService myUserDetailsService;
+    private final UserService userService;
 
-    public UserValidator(MyUserDetailsService myUserDetailsService) {
-        this.myUserDetailsService = myUserDetailsService;
-    }
+    public UserValidator( UserService userService) {
+        this.userService = userService;
+        ;    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -25,12 +29,11 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        try {
-            myUserDetailsService.loadUserByUsername(user.getUsername());
-        } catch (UsernameNotFoundException ignored) {
-            return;
+        String username = user.getUsername();
+        Optional<User> existingUser = userService.findByUsername(username);
+        if (existingUser.isPresent()) {
+            errors.rejectValue("username", "username.alreadyExists", "Пользователь с таким именем уже существует!");
         }
-        errors.rejectValue("username", "", "Человек с таким именем уже существует");
 
 
     }
