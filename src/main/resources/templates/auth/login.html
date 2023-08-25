@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
@@ -7,16 +7,17 @@
 <body>
 
 <form name="f" method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     <label for="username">Введите имя пользователя:</label>
     <input type="text" name="username" id="username">
     <br/>
-    <label for="password">Введите попроль:</label>
+    <label for="password">Введите пароль:</label>
     <input type="password" name="password" id="password">
     <br/>
     <input type="submit" value="Login"/>
-    <a href="/auth/registration">Sign up</a>
+    <button type="button" onclick="location.href='/auth/registration'">Registration</button>
 
-    <div th:if="${param.error}" style="collor: red">
+    <div th:if="${param.error}" style="color: red">
         Неправильное имя или пароль
     </div>
 
@@ -24,3 +25,4 @@
 
 </body>
 </html>
+

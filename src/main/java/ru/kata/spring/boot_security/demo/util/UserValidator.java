@@ -30,7 +30,8 @@ public class UserValidator implements Validator {
         String username = user.getUsername();
 
         if (usersRepository.findByUsername(username).isPresent()) {
-            errors.rejectValue("username", "username.alreadyExists", "Пользователь с таким именем уже существует!");
+            errors.rejectValue("username", "username.alreadyExists",
+                    "Пользователь с таким именем уже существует!");
         }
 
 
