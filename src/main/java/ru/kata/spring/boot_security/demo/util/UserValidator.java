@@ -1,24 +1,22 @@
 package ru.kata.spring.boot_security.demo.util;
 
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.services.MyUserDetailsService;
-import ru.kata.spring.boot_security.demo.services.UserService;
+import ru.kata.spring.boot_security.demo.repositories.UsersRepository;
 
-import java.util.Optional;
 
 @Component
 public class UserValidator implements Validator {
 
-    private final UserService userService;
+    private final UsersRepository usersRepository;
 
-    public UserValidator( UserService userService) {
-        this.userService = userService;
-        ;    }
+    public UserValidator(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
+
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -30,8 +28,8 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
         String username = user.getUsername();
-        Optional<User> existingUser = userService.findByUsername(username);
-        if (existingUser.isPresent()) {
+
+        if (usersRepository.findByUsername(username).isPresent()) {
             errors.rejectValue("username", "username.alreadyExists", "Пользователь с таким именем уже существует!");
         }
 
