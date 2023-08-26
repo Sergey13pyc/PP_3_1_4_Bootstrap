@@ -3,7 +3,7 @@ package ru.kata.spring.boot_security.demo.services;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.UsersRepository;
+import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 import java.util.List;
 
@@ -12,32 +12,32 @@ public class UserServiceImpl implements UserService{
 
     // прописать валидацию user
 
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
 
-    public UserServiceImpl(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public List<User> findAll() {
-        return usersRepository.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User findByUsername(String username) {
-        if (usersRepository.findByUsername(username).isEmpty()) {
-            throw new UsernameNotFoundException("Пользователь с таким именем не найден");
+        if (userRepository.findByUsername(username).isEmpty()) {
+            throw new UsernameNotFoundException(String.format("Пользователь c именем '%s'  не найден", username));
         }
-        return usersRepository.findByUsername(username).get();
+        return userRepository.findByUsername(username).get();
 
     }
 
     @Override
     public User findUserById(Long id) {
-        if (usersRepository.findById(id).isEmpty()) {
-            throw new UsernameNotFoundException("Пользователь с таким ID не найден");
+        if (userRepository.findById(id).isEmpty()) {
+            throw new UsernameNotFoundException(String.format("Пользователь с ID = '%s' не найден", id));
         }
-        return usersRepository.findById(id).get();
+        return userRepository.findById(id).get();
     }
 
     @Override

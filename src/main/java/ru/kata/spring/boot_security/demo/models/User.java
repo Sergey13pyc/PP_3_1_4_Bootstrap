@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.models;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -11,12 +13,18 @@ public class User {
     private Long id;
     @Column(name = "username")
     private String username;
-    @Column(name = "yearOfBirth")
+    @Column(name = "year_of_birth")
     private Integer yearOfBirth;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
     private String password;
+
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn (name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
+    private List<Role> roles;
 
     public User() {}
 
@@ -66,6 +74,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

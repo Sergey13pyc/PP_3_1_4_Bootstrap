@@ -5,20 +5,20 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.UsersRepository;
+import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 @Service
 public class RegistrationService {
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     @Autowired
-    public RegistrationService(UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
-        this.usersRepository = usersRepository;
+    public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        usersRepository.save(user);
+        userRepository.save(user);
     }
 }
