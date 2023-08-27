@@ -1,7 +1,9 @@
 package ru.kata.spring.boot_security.demo.services;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
@@ -13,9 +15,11 @@ public class UserServiceImpl implements UserService{
     // прописать валидацию user
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -40,18 +44,28 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(id).get();
     }
 
+    @Transactional
     @Override
-    public void updateUser(User user, Long id) {
-
+    public void updateUser(User updatedUser, Long id) {
+        updatedUser.setId(id);
+        updatedUser.setRoles(updatedUser.getRoles());
+        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        userRepository.save(updatedUser);
     }
 
+    @Transactional
     @Override
     public void saveUser(User user) {
+        // Шифрование пароля с использованием PasswordEncoder перед сохранением пользователя
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
 
     }
 
+    @Transactional
     @Override
-    public boolean deleteUserById(Long id) {
-        return false;
+    public void deleteUserById(Long id) {
+        userRepository.deleteById(id);
+
     }
 }

@@ -6,16 +6,16 @@ import ru.kata.spring.boot_security.demo.models.User;
 
 import java.util.Collection;
 
-public class MyUserDetails implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
     private final User user;
 
-    public MyUserDetails(User user) {
+    public UserDetailsImpl(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.user.getRoles();
     }
 
     @Override
