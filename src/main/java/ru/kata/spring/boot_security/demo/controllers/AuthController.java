@@ -29,7 +29,8 @@ public class AuthController {
     public String loginPage() {
         return "auth/login";
     }
-@GetMapping("/registration")
+
+    @GetMapping("/registration")
     public String registrationPage(@ModelAttribute("user") User user) {
         return "auth/registration";
     }
@@ -37,7 +38,7 @@ public class AuthController {
     @PostMapping("/registration")
     public String performRegistration(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         userValidator.validate(user, bindingResult);
-        if(bindingResult.hasErrors())
+        if (bindingResult.hasErrors())
             return "/auth/registration";
         registrationService.register(user);
         return "redirect:/auth/login";
