@@ -16,10 +16,12 @@ import ru.kata.spring.boot_security.demo.services.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final SuccessUserHandler successUserHandler;
 
     @Autowired
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsServiceImpl) {
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsServiceImpl, SuccessUserHandler successUserHandler) {
         this.userDetailsServiceImpl = userDetailsServiceImpl;
+        this.successUserHandler = successUserHandler;
     }
 
     @Override
@@ -28,12 +30,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // конфигурируем авторизацию
         http.authorizeRequests()
                 .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN")//В "/admin/**" могут заходить только юзеры с ролью "ADMIN"
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
                 .and()
                 // добавляем своию страницу login и настраиваем её
                 .formLogin().loginPage("/auth/login")
                 .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/user", true).
+                // при успешной регистрации добавляем перенаправление каждого на свою страницу
+                .successHandler(successUserHandler).
                 failureUrl("/auth/login?error")
                 .and()
                 // настраиваем logout

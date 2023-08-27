@@ -29,8 +29,8 @@ public class RegistrationService {
     @Transactional
     public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        Role userRole = new Role();
-        userRole.setName("ROLE_USER");
+        Role userRole = new Role();         // устанавливаем роль Юзер всем пользователям
+        userRole.setName("ROLE_USER");     // прошедшим регистрацию
         roleRepository.save(userRole);
         user.setRoles(Collections.singletonList(userRole));
         userRepository.save(user);
