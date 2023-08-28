@@ -29,7 +29,7 @@ public class UsersController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetailsImpl = (UserDetailsImpl)authentication.getPrincipal();
         System.out.println(userDetailsImpl.getUser());
-        return "user";
+        return "user_home_page";
 
 
     }
@@ -38,6 +38,6 @@ public class UsersController {
     public String showUserAccount(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
-        return "user";
+        return "user_home_page";
     }
 }

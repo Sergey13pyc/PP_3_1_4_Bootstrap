@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <title>Главная страница</title>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
+<h1>Добро пожаловать на главную страницу!</h1>
+<h1>Для того чтобы продолжить, вам нужно войти или зарегистрироваться.</h1>
+<button type="button" onclick="location.href='/auth/registration'">Зарегистрироваться</button>
+<button type="button" onclick="location.href='/auth/login'">Войти</button>
 
 
 </body>
