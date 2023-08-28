@@ -3,16 +3,13 @@ package ru.kata.spring.boot_security.demo.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -31,7 +28,19 @@ public class AdminController {
         model.addAttribute("users", userService.findAll());
         return "all_users";
     }
+    @GetMapping("/edit/{id}")
+    public String editUser(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("user", userService.findUserById(id));
+        model.addAttribute("userRoles", roleService.getRoles());
+        return "/edit";
+    }
 
+
+    @PatchMapping("/update/{id}")
+    public String updateUser(@ModelAttribute("user") User updateUser, @PathVariable("id") Long id) {
+        userService.updateUser(updateUser, id); //Находим по id того юзера, которого надо изменить
+        return "redirect:/admin";
+    }
     @DeleteMapping("/delete/{id}")
     public String deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
