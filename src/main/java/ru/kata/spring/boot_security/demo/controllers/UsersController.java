@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.security.UserDetailsImpl;
 import ru.kata.spring.boot_security.demo.services.UserService;
+
 import java.security.Principal;
 
 @Controller
@@ -20,14 +21,14 @@ public class UsersController {
     }
 
     @GetMapping("/")
-    public String sayHello () {
+    public String sayHello() {
         return "index";
     }
 
     @GetMapping("/showUserInfo")
-    public String showUserInfo () {
+    public String showUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetailsImpl = (UserDetailsImpl)authentication.getPrincipal();
+        UserDetailsImpl userDetailsImpl = (UserDetailsImpl) authentication.getPrincipal();
         System.out.println(userDetailsImpl.getUser());
         return "user_home_page";
 

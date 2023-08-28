@@ -10,7 +10,7 @@ import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     // прописать валидацию user
 

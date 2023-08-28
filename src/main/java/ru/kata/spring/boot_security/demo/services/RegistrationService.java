@@ -17,6 +17,7 @@ public class RegistrationService {
 
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+
     @Autowired
     public RegistrationService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;

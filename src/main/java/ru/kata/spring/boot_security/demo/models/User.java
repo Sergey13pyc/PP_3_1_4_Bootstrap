@@ -20,13 +20,14 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn (name = "users_id"),
+            joinColumns = @JoinColumn(name = "users_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private List<Role> roles;
 
-    public User() {}
+    public User() {
+    }
 
     public User(Long id, String username, Integer yearOfBirth, String email, String password) {
         this.id = id;

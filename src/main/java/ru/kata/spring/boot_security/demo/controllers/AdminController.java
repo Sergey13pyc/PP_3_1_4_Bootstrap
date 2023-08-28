@@ -7,6 +7,7 @@ import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class AdminController {
         model.addAttribute("users", userService.findAll());
         return "all_users";
     }
+
     @GetMapping("/edit/{id}")
     public String editUser(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.findUserById(id));
@@ -41,6 +43,7 @@ public class AdminController {
         userService.updateUser(updateUser, id); //Находим по id того юзера, которого надо изменить
         return "redirect:/admin";
     }
+
     @DeleteMapping("/delete/{id}")
     public String deleteUserById(@PathVariable("id") Long id) {
         userService.deleteUserById(id);
@@ -54,6 +57,7 @@ public class AdminController {
         return "add";
 
     }
+
     @PostMapping("/create")
     public String createUser(@ModelAttribute("user") User user, @ModelAttribute("nameRole") String name) {
         List<Role> roleList = new ArrayList<>();
