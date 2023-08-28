@@ -2,10 +2,7 @@ package ru.kata.spring.boot_security.demo.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
@@ -33,6 +30,12 @@ public class AdminController {
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.findAll());
         return "all_users";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteUserById(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
+        return "redirect:/admin";
     }
 
     @GetMapping("/add")
