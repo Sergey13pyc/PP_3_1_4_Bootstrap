@@ -27,11 +27,11 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        String username = user.getUsername();
+        String email = user.getEmail();
 
-        if (userRepository.findByUsername(username).isPresent()) {
-            errors.rejectValue("username", "username.alreadyExists",
-                    "Пользователь с таким именем уже существует!");
+        if (userRepository.findByEmail(email).isPresent()) {
+            errors.rejectValue("email", "email.alreadyExists",
+                    "Пользователь с таким адресом почты уже существует!");
         }
 
 

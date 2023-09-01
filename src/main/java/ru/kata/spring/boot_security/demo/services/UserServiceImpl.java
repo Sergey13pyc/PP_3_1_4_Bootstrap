@@ -39,6 +39,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        if (userRepository.findByEmail(email).isEmpty()) {
+            throw new UsernameNotFoundException(String.format("Пользователь с почтой '%s'  не найден", email));
+        }
+        return userRepository.findByEmail(email).get();
+    }
+
+    @Override
     public User findUserById(Long id) {
         if (userRepository.findById(id).isEmpty()) {
             throw new UsernameNotFoundException(String.format("Пользователь с ID = '%s' не найден", id));

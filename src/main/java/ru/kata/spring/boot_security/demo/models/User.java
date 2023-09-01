@@ -11,10 +11,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "username")
-    private String username;
-    @Column(name = "year_of_birth")
-    private Integer yearOfBirth;
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "lastName")
+    private String lastName;
+    @Column(name = "age")
+    private Byte age;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -29,10 +32,11 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, Integer yearOfBirth, String email, String password) {
+    public User(Long id, String username, Integer yearOfBirth, String firstName, String lastName, Byte age, String email, String password) {
         this.id = id;
-        this.username = username;
-        this.yearOfBirth = yearOfBirth;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
         this.email = email;
         this.password = password;
     }
@@ -45,20 +49,28 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public Integer getYearOfBirth() {
-        return yearOfBirth;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setYearOfBirth(Integer year_of_birth) {
-        this.yearOfBirth = year_of_birth;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Byte getAge() {
+        return age;
+    }
+
+    public void setAge(Byte age) {
+        this.age = age;
     }
 
     public String getEmail() {
@@ -89,10 +101,12 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
-                ", year_of_birth=" + yearOfBirth +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }
