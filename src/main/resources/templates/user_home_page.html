@@ -10,7 +10,10 @@
         /* Отступ для контента под фиксированным навигационным баром */
         body {
             padding-top: 70px;
+
         }
+
+
     </style>
 </head>
 
@@ -42,7 +45,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10"  >
                     <h3>
                         User information-page
                     </h3>
@@ -66,7 +69,7 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <th th:text="${user.getId()}"></th>
+                                            <td  th:text="${user.getId()}"></td>
                                             <td th:text="${user.getFirstName()}"></td>
                                             <td th:text="${user.getLastName()}"></td>
                                             <td th:text="${user.getAge()}"></td>
