@@ -7,22 +7,23 @@
 <table>
 
     <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Пароль</th>
-        <th>Email</th>
-        <th>Год рождения</th>
-        <th>Роли</th>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
     </tr>
 
     <tr
             th:each="user : ${users}">
         <td th:text="${user.getId()}"></td>
-        <td th:text="${user.getUsername()}"></td>
-        <td th:text="${user.getPassword()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getAge()}"></td>
         <td th:text="${user.getEmail()}"></td>
-        <td th:text="${user.getYearOfBirth()}"></td>
-        <td th:text="${user.getRoles()}"></td>
+        <td th:each="role : ${user.getRoles()}"
+            th:text="${role.getName().replace('ROLE_', '') + ' '}"></td>
         <td>
             <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.id})}">
                 <input type="submit" value="Редактировать"/>
