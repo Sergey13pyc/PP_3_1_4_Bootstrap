@@ -116,7 +116,7 @@
                                                                 </span>
                                                             </span>
                                                     </td>
-
+                                                    <!-- Сама кнопка EDIT  -->
                                                     <td>
                                                         <button type="button" class="btn btn-info" data-bs-toggle="modal"
                                                                 th:data-bs-target="'#editModal'+${alluser.getId()}">Edit
@@ -237,6 +237,7 @@
                                                         </div>
                                                     </div>
 
+
                                                     <!--МОДАЛЬНОЕ ОКНО ДЛЯ DELETE-->
 
                                                     <div class="modal" tabindex="-1" th:id="${'deleteModal'+ alluser.getId()}"
@@ -337,10 +338,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+
                                                 </tr>
                                                 </tbody>
                                             </table>
-                                        </div>
+                                        </div><!--КОНЧИЛАСЬ ТАБЛИЦА И ЗАКРЫЛОСЬ CARD BODY-->
+                                    </div><!--КОНЧИЛАСЬ ТАБЛИЦА И ЗАКРЫЛОСЬ CARD BG-DEFAULT-->
+
+
+
+                                        <!--TAB ПАНЕЛЬ ВКАЛАДКА ADD NEW USER-->
 
                                         <div class="tab-pane fade" id="nav-new_user" role="tabpanel"
                                              aria-labelledby="nav-new_user-tab">
@@ -399,10 +407,18 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
+
+
+
+
                     </div>
                 </div>
             </div>
