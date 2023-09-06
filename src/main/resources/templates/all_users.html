@@ -57,6 +57,43 @@
 
                 <div class="col-md-10">
                     <div class="tab-content" id="v-pills-tabContent">
+                        <!-- Это раскрывающаяся панель под id "v-pills-user" при нажатии на вкладку User-->
+                        <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+
+                            <p class="fw-bold fs-4">User information-page</p>
+
+                            <p class="fw-bold fs-5">About user</p>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Surname</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td th:text="${authenticatedUser.getId()}"/>
+                                    <td th:text="${authenticatedUser.getFirstName()}"/>
+                                    <td th:text="${authenticatedUser.getLastName()}"/>
+                                    <td th:text="${authenticatedUser.getAge()}"/>
+                                    <td th:text="${authenticatedUser.getEmail()}"/>
+                                    <td>
+                                                <span th:each="role : ${authenticatedUser.getRoles()}"
+                                                      th:switch="${role.getName()}">
+                                                    <span th:case="'ROLE_ADMIN'">ADMIN</span>
+                                                    <span th:case="'ROLE_USER'">USER</span>
+                                                </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
                         <div class="tab-pane fade show active" id="v-pills-admin" role="tabpanel"
                              aria-labelledby="v-pills-admin-tab">
                             <p class="fw-bold fs-4">Admin panel</p>
