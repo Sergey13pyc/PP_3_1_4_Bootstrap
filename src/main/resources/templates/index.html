@@ -1,14 +1,62 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Главная страница</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Иконка сайта -->
+    <link rel="icon" href="https://img.freepik.com/free-icon/leaf_318-654663.jpg">
+
+    <title>Index page</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url(https://oboitd.ru/images/goods/big/20200125110231_Priroda_10-344.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        /* Задаем цвет и контур текста */
+        h1, h2, p {
+            color: #ffffff;
+            text-shadow:
+                    -1px -1px 0 #000000,
+                    1px -1px 0 #000000,
+                    -1px  1px 0 #000000,
+                    1px  1px 0 #000000;
+        }
+
+        /* Поднимаем элементы на определенное расстояние */
+        h1 {
+            margin-top: 50px;
+        }
+
+        h2 {
+            margin-top: 30px;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-<h1>Добро пожаловать на главную страницу!</h1>
-<h1>Для того чтобы продолжить, вам нужно войти или зарегистрироваться.</h1>
-<button type="button" onclick="location.href='/auth/registration'">Зарегистрироваться</button>
-<button type="button" onclick="location.href='/auth/login'">Войти</button>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div>
+        <h1 class="text-center mb-4 ">Добро пожаловать на главную страницу!</h1>
+        <h1 class="text-center mb-4">Для того чтобы продолжить, вам нужно войти или зарегистрироваться.</h1>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-primary me-2" onclick="location.href='/auth/registration'">Зарегистрироваться</button>
+            <button type="button" class="btn btn-primary ms-2" onclick="location.href='/auth/login'">Войти</button>
+        </div>
+    </div>
+</div>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
 </body>
 </html>

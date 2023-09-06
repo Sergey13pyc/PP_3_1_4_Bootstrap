@@ -34,13 +34,6 @@ public class AdminController {
         return "all_users";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editUser(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.findUserById(id));
-        model.addAttribute("userRoles", roleService.getRoles());
-        return "/edit";
-    }
-
 
     @PatchMapping("/update/{id}")
     public String updateUser(@ModelAttribute("user") User updateUser, @PathVariable("id") Long id) {
@@ -54,13 +47,6 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/add")
-    public String addUser(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("roles", roleService.getRoles());
-        return "add";
-
-    }
 
     @PostMapping("/create")
     public String saveNewUser(@ModelAttribute("user") User user) {

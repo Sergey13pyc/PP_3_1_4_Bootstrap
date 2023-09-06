@@ -18,9 +18,9 @@ import java.util.List;
 @Component
 public class DatabaseInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public DatabaseInitializer(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
@@ -42,7 +42,7 @@ public class DatabaseInitializer implements ApplicationListener<ContextRefreshed
         adminRole.setName("ROLE_ADMIN");
         roleRepository.save(adminRole);
 
-        List<Role> userRoles = Arrays.asList(userRole);
+        List<Role> userRoles = List.of(userRole);
         List<Role> adminRoles = Arrays.asList(adminRole, userRole);
 
 
